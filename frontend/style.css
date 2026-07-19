@@ -1,0 +1,701 @@
+/* Reset and Core CSS variables */
+:root {
+    --bg-dark: #070a13;
+    --bg-sidebar: #0c101f;
+    --card-bg: rgba(18, 25, 47, 0.6);
+    --card-border: rgba(255, 255, 255, 0.07);
+    --text-main: #f1f5f9;
+    --text-muted: #64748b;
+    --primary: #00f2fe;
+    --primary-glow: rgba(0, 242, 254, 0.35);
+    --secondary: #4facfe;
+    
+    /* Wards Color Palette */
+    --emergency: #ff416c;
+    --emergency-glow: rgba(255, 65, 108, 0.4);
+    --mental-health: #a18cd1;
+    --mental-health-glow: rgba(161, 140, 209, 0.4);
+    --general: #0bae72;
+    --general-glow: rgba(11, 174, 114, 0.4);
+    
+    --transition-speed: 0.3s;
+    --font-outfit: 'Outfit', sans-serif;
+    --font-inter: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-inter);
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+/* App Layout Grid */
+.app-container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    height: 100vh;
+}
+
+/* Sidebar Styling */
+.sidebar {
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--card-border);
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    justify-content: space-between;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 3rem;
+}
+
+.brand-icon {
+    font-size: 1.8rem;
+    color: var(--primary);
+    filter: drop-shadow(0 0 8px var(--primary-glow));
+}
+
+.brand-name {
+    font-family: var(--font-outfit);
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.accent-text {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    flex-grow: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.2rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 12px;
+    transition: all var(--transition-speed) ease;
+}
+
+.nav-item i {
+    font-size: 1.1rem;
+}
+
+.nav-item:hover, .nav-item.active {
+    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.nav-item.active {
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.1), rgba(79, 172, 254, 0.1));
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    color: var(--primary);
+}
+
+.sidebar-footer {
+    border-top: 1px solid var(--card-border);
+    padding-top: 1.5rem;
+}
+
+.api-status {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.status-indicator.online {
+    background-color: var(--general);
+    box-shadow: 0 0 8px var(--general-glow);
+}
+
+.status-indicator.offline {
+    background-color: var(--emergency);
+    box-shadow: 0 0 8px var(--emergency-glow);
+}
+
+/* Main Content Area */
+.main-content {
+    padding: 2.5rem 3rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.main-header h1 {
+    font-family: var(--font-outfit);
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 0.3rem;
+}
+
+.date-display {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Dashboard Tabs Layout */
+.dashboard-tab {
+    display: none;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.dashboard-tab.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Triage Form Grid */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 2.5rem;
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transition: transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.glass-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--card-border);
+    padding-bottom: 1rem;
+}
+
+.card-icon {
+    font-size: 1.4rem;
+    color: var(--secondary);
+}
+
+.card-header h2 {
+    font-family: var(--font-outfit);
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+/* Forms styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper i {
+    position: absolute;
+    left: 1.2rem;
+    color: var(--text-muted);
+}
+
+.input-wrapper input, .input-wrapper textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 1rem 1.2rem 1rem 3rem;
+    color: var(--text-main);
+    font-family: var(--font-inter);
+    font-size: 0.95rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.input-wrapper input:focus, .input-wrapper textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.15);
+}
+
+.text-area-wrapper i {
+    top: 1.2rem;
+}
+
+.text-area-wrapper textarea {
+    resize: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border: none;
+    border-radius: 12px;
+    color: #030712;
+    font-family: var(--font-outfit);
+    font-weight: 600;
+    font-size: 1.05rem;
+    padding: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    transition: all var(--transition-speed) ease;
+    box-shadow: 0 4px 15px var(--primary-glow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* Output Card Details */
+.output-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 1rem;
+    gap: 1.2rem;
+}
+
+.placeholder-icon {
+    font-size: 3.5rem;
+    color: var(--text-muted);
+    opacity: 0.3;
+}
+
+.output-content h3 {
+    font-family: var(--font-outfit);
+    font-size: 1.3rem;
+    color: var(--text-muted);
+}
+
+.output-content p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    max-width: 280px;
+    line-height: 1.5;
+}
+
+/* ECG Heartbeat Animation */
+.ecg-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 3rem 1rem;
+}
+
+#heart-pulse-svg {
+    width: 150px;
+    height: 73px;
+}
+
+#heart-pulse-svg path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: pulseLoop 2s linear infinite;
+}
+
+@keyframes pulseLoop {
+    0% {
+        stroke-dashoffset: 1000;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.ecg-loader p {
+    color: var(--primary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    animation: pulseText 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulseText {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+}
+
+/* Result details card design */
+.result-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.result-badge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+}
+
+.result-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+}
+
+.ward-badge {
+    font-family: var(--font-outfit);
+    font-weight: 700;
+    font-size: 1.8rem;
+    padding: 0.4rem 1.6rem;
+    border-radius: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.ward-emergency {
+    background: linear-gradient(135deg, rgba(255, 65, 108, 0.15), rgba(255, 75, 43, 0.15));
+    border: 1px solid var(--emergency);
+    color: var(--emergency);
+    text-shadow: 0 0 10px var(--emergency-glow);
+}
+
+.ward-mental_health {
+    background: linear-gradient(135deg, rgba(161, 140, 209, 0.15), rgba(251, 194, 235, 0.15));
+    border: 1px solid var(--mental-health);
+    color: var(--mental-health);
+    text-shadow: 0 0 10px var(--mental-health-glow);
+}
+
+.ward-general {
+    background: linear-gradient(135deg, rgba(11, 174, 114, 0.15), rgba(51, 217, 178, 0.15));
+    border: 1px solid var(--general);
+    color: var(--general);
+    text-shadow: 0 0 10px var(--general-glow);
+}
+
+.details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px solid var(--card-border);
+    padding: 1rem 1.2rem;
+    border-radius: 14px;
+}
+
+.detail-icon {
+    width: 42px;
+    height: 42px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+    font-size: 1.1rem;
+}
+
+.detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.detail-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.detail-value {
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.detail-value.highlight {
+    font-family: var(--font-outfit);
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.reasoning-box {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 3px solid var(--secondary);
+    padding: 1.2rem;
+    border-radius: 0 14px 14px 0;
+}
+
+.reasoning-box h3 {
+    font-family: var(--font-outfit);
+    font-size: 0.95rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reasoning-box p {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    line-height: 1.5;
+}
+
+/* Doctors Directory Styles */
+.directory-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.directory-header h2 {
+    font-family: var(--font-outfit);
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.directory-header p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    color: var(--text-main);
+    font-family: var(--font-outfit);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.8rem 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.doctor-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transition: all var(--transition-speed) ease;
+}
+
+.doctor-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.doctor-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.doctor-avatar {
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, rgba(0, 242, 254, 0.1), rgba(79, 172, 254, 0.1));
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.4rem;
+}
+
+.doctor-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.doctor-meta h3 {
+    font-family: var(--font-outfit);
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.doctor-meta .specialty {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: capitalize;
+}
+
+.doctor-status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--card-border);
+    padding-top: 1rem;
+}
+
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.status-free {
+    background: rgba(11, 174, 114, 0.1);
+    color: var(--general);
+    border: 1px solid rgba(11, 174, 114, 0.2);
+}
+
+.status-badge.status-free .status-dot {
+    background: var(--general);
+    box-shadow: 0 0 6px var(--general-glow);
+}
+
+.status-badge.status-busy {
+    background: rgba(255, 65, 108, 0.1);
+    color: var(--emergency);
+    border: 1px solid rgba(255, 65, 108, 0.2);
+}
+
+.status-badge.status-busy .status-dot {
+    background: var(--emergency);
+    box-shadow: 0 0 6px var(--emergency-glow);
+}
+
+.status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .app-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .sidebar {
+        display: none; /* In a real project we'd use a hamburger, but keeping it simple/focused */
+    }
+    
+    .main-content {
+        padding: 1.5rem;
+    }
+    
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}

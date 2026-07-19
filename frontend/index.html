@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI-Powered Hospital Patient Triage Dashboard. Dynamically analyze symptoms and assign optimal medical resources.">
+    <title>MedFlow AI - Hospital Triage Dashboard</title>
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-heart-pulse brand-icon"></i>
+                <span class="brand-name">MedFlow <span class="accent-text">AI</span></span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" id="nav-triage" onclick="switchTab('triage-tab')">
+                    <i class="fa-solid fa-notes-medical"></i>
+                    <span>Patient Triage</span>
+                </a>
+                <a href="#" class="nav-item" id="nav-doctors" onclick="switchTab('doctors-tab')">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <span>Doctor Directory</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="api-status">
+                    <span class="status-indicator online"></span>
+                    <span class="status-text">Server Connected</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h1>Hospital Resource & Triage Control</h1>
+                <div class="date-display" id="current-date">July 19, 2026</div>
+            </header>
+
+            <!-- Triage Panel Tab -->
+            <section id="triage-tab" class="dashboard-tab active">
+                <div class="grid-container">
+                    <!-- Form Card -->
+                    <div class="glass-card form-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-id-card-clip card-icon"></i>
+                            <h2>New Patient Intake</h2>
+                        </div>
+                        <form id="triage-form" onsubmit="submitTriage(event)">
+                            <div class="input-group">
+                                <label for="patient-name">Patient Full Name</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-regular fa-user"></i>
+                                    <input type="text" id="patient-name" placeholder="e.g. John Doe" required>
+                                </div>
+                            </div>
+
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label for="patient-age">Patient Age</label>
+                                    <div class="input-wrapper">
+                                        <i class="fa-regular fa-calendar"></i>
+                                        <input type="number" id="patient-age" placeholder="Age" min="0" max="150" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="patient-query">Symptoms / Medical Concern</label>
+                                <div class="input-wrapper text-area-wrapper">
+                                    <i class="fa-solid fa-stethoscope"></i>
+                                    <textarea id="patient-query" placeholder="Describe symptoms or query (e.g. Sudden severe chest pain, shortness of breath...)" rows="4" required></textarea>
+                                </div>
+                            </div>
+
+                            <button type="submit" id="btn-submit-triage" class="btn-primary">
+                                <span>Run AI Triage Classification</span>
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Output Triage Results Card -->
+                    <div class="glass-card output-card">
+                        <div class="card-header">
+                            <i class="fa-solid fa-square-poll-vertical card-icon"></i>
+                            <h2>Analysis & Routing</h2>
+                        </div>
+                        <div class="output-content" id="output-placeholder">
+                            <div class="placeholder-icon">
+                                <i class="fa-solid fa-brain-circuit"></i>
+                            </div>
+                            <h3>Waiting for Classification</h3>
+                            <p>Fill out the patient intake form and execute the AI triage router to classify the patient and assign medical personnel.</p>
+                        </div>
+
+                        <!-- ECG Heart Rate Loading Indicator -->
+                        <div class="ecg-loader" id="ecg-loader" style="display: none;">
+                            <svg version="1.1" id="heart-pulse-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 150 73" enable-background="new 0 0 150 73" xml:space="preserve">
+                                <path fill="none" stroke="#00f2fe" stroke-width="3" stroke-miterlimit="10" d="M0,45.4h32.2l3.8-8.7l5.2,14.6l5.7-41.9l6.1,62.8l4.7-27.1l3.5,6.3H150" />
+                            </svg>
+                            <p>MedFlow AI is evaluating symptoms...</p>
+                        </div>
+
+                        <!-- Real Triage Result Card -->
+                        <div class="result-details" id="triage-result" style="display: none;">
+                            <div class="result-badge-container">
+                                <span class="result-label">Assigned Ward</span>
+                                <div class="ward-badge" id="result-ward">Emergency</div>
+                            </div>
+
+                            <div class="details-list">
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="fa-solid fa-user"></i></div>
+                                    <div class="detail-info">
+                                        <span class="detail-label">Patient Name</span>
+                                        <span class="detail-value" id="result-name">John Doe</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                                    <div class="detail-info">
+                                        <span class="detail-label">Age</span>
+                                        <span class="detail-value" id="result-age">32</span>
+                                    </div>
+                                </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="fa-solid fa-user-doctor"></i></div>
+                                    <div class="detail-info">
+                                        <span class="detail-label">Assigned Professional</span>
+                                        <span class="detail-value highlight" id="result-doctor">Dr. Sarah Jenkins</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="reasoning-box">
+                                <h3><i class="fa-solid fa-quote-left"></i> Classification Reasoning</h3>
+                                <p id="result-reasoning">LLM classified based on: 'chest pain'</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Doctors Directory Tab -->
+            <section id="doctors-tab" class="dashboard-tab">
+                <div class="directory-header">
+                    <div class="header-info">
+                        <h2>Hospital Medical Staff Availability</h2>
+                        <p>Real-time availability tracking of on-call triage specialists</p>
+                    </div>
+                    <button class="btn-secondary" id="btn-reset-doctors" onclick="resetDoctors()">
+                        <i class="fa-solid fa-arrows-rotate"></i>
+                        <span>Reset All to Available</span>
+                    </button>
+                </div>
+
+                <div class="doctors-grid" id="doctors-container">
+                    <!-- Dynamic doctor cards go here -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
