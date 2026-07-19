@@ -6,10 +6,13 @@ The project has been refactored into a separate **FastAPI backend** (running a L
 
 ## UI Showcase
 
-Here is a preview of the interactive dashboard demonstrating patient triage submission, real-time routing result display, staff allocation updates, and availability reset triggers:
+Here is a screenshot preview of the interactive dashboard demonstrating patient triage intake, real-time routing results, specialist staff allocation, and scheduling slot times:
 
-![MedFlow AI Triage Portal Demo](/Users/dheeraj_kumar/Downloads/Hospital-agent/demo.webp)
+![alt text](image.png)
 
+![alt text](image-1.png)
+
+![alt text](image-2.png)
 ---
 
 ## Directory Structure

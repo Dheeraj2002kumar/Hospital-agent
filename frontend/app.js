@@ -1,5 +1,5 @@
 // Replace with your actual Render URL after deploying the backend
-const RENDER_BACKEND_URL = "https://your-hospital-backend.onrender.com";
+const RENDER_BACKEND_URL = "https://hospital-agent-gyhz.onrender.com";
 
 const API_BASE_URL = 
     window.location.hostname === "localhost" || 
