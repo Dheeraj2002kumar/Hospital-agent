@@ -1,8 +1,7 @@
-doctor_name,ward,status
-Dr. Sarah Jenkins,emergency,free
-Dr. Marcus Vance,emergency,free
-Dr. Emily Carter,general,free
-Dr. Alan Turing,general,free
-Dr. Gregory House,general,free
-Dr. Sigmund Freud,mental_health,free
-Dr. Viktor Frankl,mental_health,free
+doctor_name,ward,status,next_slot,slot_minutes
+Dr. Sharma,general,active,09:20,20
+Dr. Iyer,general,active,09:15,20
+Dr. Khan,emergency,active,09:10,10
+Dr. Rao,emergency,active,09:10,10
+Dr. Mehta,mental_health,active,10:30,30
+Dr. Gupta,mental_health,active,10:00,30

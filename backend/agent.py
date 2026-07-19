@@ -21,6 +21,7 @@ class PatientState(TypedDict):
     ward: str
     reasoning: str
     assigned_doctor: str
+    assigned_slot: str
 
 # Define nodes
 def intake_node(state: PatientState):
@@ -32,7 +33,9 @@ def intake_node(state: PatientState):
         "ward": "",
         "reasoning": "",
         "assigned_doctor": "",
+        "assigned_slot": "",
     }
+
 
 # Router configuration
 _llm = None
@@ -107,6 +110,18 @@ def mental_health_ward_node(state: PatientState) -> PatientState:
     print(f"Reason: {state['reasoning']}")
     return state
 
+def parse_time(time_str):
+    try:
+        parts = str(time_str).split(':')
+        return int(parts[0]) * 60 + int(parts[1])
+    except Exception:
+        return 9 * 60  # fallback to 09:00
+
+def format_time(minutes):
+    hours = (minutes // 60) % 24
+    mins = minutes % 60
+    return f"{hours:02d}:{mins:02d}"
+
 def doctor_availability_node(state: PatientState) -> PatientState:
     ward = state["ward"]
     
@@ -115,23 +130,41 @@ def doctor_availability_node(state: PatientState) -> PatientState:
         doctors_df = pd.read_csv(CSV_PATH)
     else:
         # Fallback dictionary/data if file is missing
-        doctors_df = pd.DataFrame(columns=["doctor_name", "ward", "status"])
+        doctors_df = pd.DataFrame(columns=["doctor_name", "ward", "status", "next_slot", "slot_minutes"])
 
-    available = doctors_df[
-        (doctors_df["ward"] == ward) & (doctors_df["status"] == "free")
+    # Find active doctors in the specified ward
+    active_docs = doctors_df[
+        (doctors_df["ward"] == ward) & (doctors_df["status"] == "active")
     ]
 
-    if not available.empty:
-        doctor = available.iloc[0]["doctor_name"]
-        assigned_doctor = doctor
-        # Mark doctor busy and write to CSV
-        doctors_df.loc[doctors_df["doctor_name"] == doctor, "status"] = "busy"
+    if not active_docs.empty:
+        # Find the doctor with the earliest next_slot time
+        minutes_list = active_docs["next_slot"].apply(parse_time)
+        earliest_index = minutes_list.idxmin()
+        
+        doctor_row = active_docs.loc[earliest_index]
+        doctor_name = doctor_row["doctor_name"]
+        booked_slot = doctor_row["next_slot"]
+        slot_duration = int(doctor_row["slot_minutes"])
+        
+        # Calculate next slot
+        current_minutes = parse_time(booked_slot)
+        new_minutes = current_minutes + slot_duration
+        next_slot_time = format_time(new_minutes)
+        
+        # Update the next_slot for this doctor in the DataFrame
+        doctors_df.loc[doctors_df["doctor_name"] == doctor_name, "next_slot"] = next_slot_time
         doctors_df.to_csv(CSV_PATH, index=False)
+        
+        assigned_doctor = doctor_name
+        assigned_slot = booked_slot
     else:
         assigned_doctor = "No doctor currently free — patient will be queued"
+        assigned_slot = "N/A"
 
-    print(f"Doctor assigned: {assigned_doctor}")
-    return {**state, "assigned_doctor": assigned_doctor}
+    print(f"Doctor assigned: {assigned_doctor} (Slot: {assigned_slot})")
+    return {**state, "assigned_doctor": assigned_doctor, "assigned_slot": assigned_slot}
+
 
 # Build LangGraph workflow
 def route_decision(state: PatientState) -> Literal["general", "emergency", "mental_health"]:

@@ -140,7 +140,15 @@
                                         <span class="detail-value highlight" id="result-doctor">Dr. Sarah Jenkins</span>
                                     </div>
                                 </div>
+                                <div class="detail-item">
+                                    <div class="detail-icon"><i class="fa-solid fa-clock"></i></div>
+                                    <div class="detail-info">
+                                        <span class="detail-label">Assigned Slot Time</span>
+                                        <span class="detail-value highlight" id="result-slot">--:--</span>
+                                    </div>
+                                </div>
                             </div>
+
 
                             <div class="reasoning-box">
                                 <h3><i class="fa-solid fa-quote-left"></i> Classification Reasoning</h3>
@@ -171,6 +179,26 @@
         </main>
     </div>
 
+    <!-- Patient Details Modal -->
+    <div id="patient-modal" class="modal-overlay" style="display: none;">
+        <div class="glass-card modal-container">
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-calendar-check"></i> Doctor's Schedule</h2>
+                <button class="close-btn" id="close-modal-btn">&times;</button>
+            </div>
+            <div class="modal-subheader">
+                <h3 id="modal-doctor-name">Dr. Sharma</h3>
+                <span id="modal-doctor-ward" class="ward-badge">General Ward</span>
+            </div>
+            <div class="modal-body">
+                <div id="modal-patients-list" class="modal-patients-list">
+                    <!-- Patients list will be rendered here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
+
