@@ -184,7 +184,7 @@ async function fetchDoctors() {
                     </div>
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span class="status-label">Next Slot</span>
-                        <span class="status-badge slot-badge" style="background: rgba(251, 108, 0, 0.12); color: var(--primary); border: 1px solid rgba(251, 108, 0, 0.25);">
+                        <span class="status-badge slot-badge" style="background: rgba(217, 122, 43, 0.15); color: var(--primary); border: 1px solid rgba(217, 122, 43, 0.35);">
                             <i class="fa-regular fa-clock" style="margin-right: 4px;"></i> ${doc.next_slot} (${doc.slot_minutes}m)
                         </span>
                     </div>
