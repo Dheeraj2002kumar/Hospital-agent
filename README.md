@@ -4,6 +4,8 @@ MedFlow AI is an intelligent hospital triage agent that automatically routes pat
 
 The project has been refactored into a separate **FastAPI backend** (running a LangGraph agent workflow) and a **premium vanilla HTML/CSS/JS frontend** featuring glassmorphic designs, responsive interfaces, and custom SVG animations.
 
+🚀 **Live Demo:** [https://hospital-agent-topaz.vercel.app/](https://hospital-agent-topaz.vercel.app/)
+
 ## UI Showcase
 
 Here is a screenshot preview of the interactive dashboard demonstrating patient triage intake, real-time routing results, specialist staff allocation, and scheduling slot times:

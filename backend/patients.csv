@@ -1,7 +1,4 @@
 name,age,query,ward,reasoning,assigned_doctor,assigned_slot
-Alice Johnson,45,Persistent anxiety and severe insomnia,general,"Fallback to general due to API error: Error code: 401 - {'error': {'message': 'Invalid API Key', 'type': 'invalid_request_error', 'code': 'invalid_api_key'}}",Dr. Sharma,09:00
-raj1,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Rao,08:50
-raj2,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Khan,09:00
-raj3,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Rao,09:00
-raj5,32,kill myself,mental_health,Crisis keyword detected — routed immediately for safety.,Dr. Mehta,10:00
-Rahul,32,Chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Khan,09:10
+Alice Smith,25,constant headache and blurry vision,general,LLM classified based on: 'constant headache and blurry vision',Dr. Sharma,09:00
+John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Iyer,09:15
+John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Sharma,09:20
