@@ -5,3 +5,5 @@ John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body
 John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Iyer,09:35
 Jane Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Sharma,09:40
 John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Iyer,09:55
+Raj,21,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,10:00
+Raj,21,kill me,mental_health,LLM classified based on: 'kill me',Dr. Mehta,10:00
