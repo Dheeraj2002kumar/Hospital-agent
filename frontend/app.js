@@ -83,6 +83,10 @@ async function submitTriage(event) {
     
     const name = document.getElementById("patient-name").value;
     const age = document.getElementById("patient-age").value;
+    const emailEl = document.getElementById("patient-email");
+    const email = emailEl ? emailEl.value : "N/A";
+    const mobileEl = document.getElementById("patient-mobile");
+    const mobile = mobileEl ? mobileEl.value : "N/A";
     const query = document.getElementById("patient-query").value;
 
     const placeholder = document.getElementById("output-placeholder");
@@ -100,7 +104,7 @@ async function submitTriage(event) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ name, age, query })
+            body: JSON.stringify({ name, age, email, mobile, query })
         });
 
         if (!response.ok) {
@@ -113,9 +117,26 @@ async function submitTriage(event) {
         // Update results values
         document.getElementById("result-name").textContent = data.name;
         document.getElementById("result-age").textContent = data.age || "N/A";
+        document.getElementById("result-pid").textContent = data.patient_id || "PID-N/A";
+        document.getElementById("result-mobile").textContent = data.mobile || "N/A";
         document.getElementById("result-doctor").textContent = data.assigned_doctor;
         document.getElementById("result-slot").textContent = data.assigned_slot || "No slot assigned";
         document.getElementById("result-reasoning").textContent = data.reasoning;
+
+        // Generate QR code ticket data
+        const qrContent = `MedFlow AI Triage Ticket\n` + 
+                          `---------------------------\n` +
+                          `Patient ID: ${data.patient_id || "N/A"}\n` +
+                          `Patient: ${data.name}\n` +
+                          `Age: ${data.age || "N/A"}\n` +
+                          `Mobile: ${data.mobile || "N/A"}\n` +
+                          `Ward: ${data.ward.toUpperCase()}\n` +
+                          `Doctor: ${data.assigned_doctor}\n` +
+                          `Slot Time: ${data.assigned_slot || "N/A"}\n` +
+                          `Reasoning: ${data.reasoning}`;
+                          
+        const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(qrContent)}`;
+        document.getElementById("result-qrcode").src = qrUrl;
 
         // Configure Ward Badge Style
         const wardBadge = document.getElementById("result-ward");

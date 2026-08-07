@@ -19,6 +19,8 @@ app.add_middleware(
 class TriageRequest(BaseModel):
     name: str
     age: str
+    email: str = None
+    mobile: str = None
     query: str
 
 @app.get("/")
@@ -38,12 +40,28 @@ def triage_patient(request: TriageRequest):
             "query": request.query
         })
         
+        # Generate Unique Patient ID
+        import random
+        import string
+        from datetime import datetime
+        year = datetime.now().year
+        random_str = ''.join(random.choices(string.ascii_uppercase + string.digits, k=5))
+        patient_id = f"PID-{year}-{random_str}"
+        
+        # Populate values in result returned to client
+        result["patient_id"] = patient_id
+        result["mobile"] = request.mobile or "N/A"
+        result["email"] = request.email or "N/A"
+        
         # Save to patients.csv if a doctor was successfully assigned
         if result.get("assigned_doctor") and "No doctor currently free" not in result["assigned_doctor"]:
             patients_file = os.path.join(os.path.dirname(CSV_PATH), 'patients.csv')
             new_patient = {
+                "patient_id": patient_id,
                 "name": result["name"],
                 "age": result.get("age", "N/A"),
+                "email": request.email or "N/A",
+                "mobile": request.mobile or "N/A",
                 "query": result["query"],
                 "ward": result["ward"],
                 "reasoning": result["reasoning"],
@@ -60,6 +78,57 @@ def triage_patient(request: TriageRequest):
             else:
                 df_updated = df_new
             df_updated.to_csv(patients_file, index=False)
+
+            # Forward to Google Sheets if configured in .env
+            sheet_webhook = os.getenv("GOOGLE_SHEET_WEBHOOK_URL")
+            if sheet_webhook and sheet_webhook.strip():
+                import urllib.request
+                import json
+                try:
+                    payload = json.dumps(new_patient).encode('utf-8')
+                    req = urllib.request.Request(
+                        sheet_webhook.strip(),
+                        data=payload,
+                        headers={'Content-Type': 'application/json'}
+                    )
+                    with urllib.request.urlopen(req, timeout=5) as response:
+                        res_body = response.read().decode('utf-8')
+                        print(f"Google Sheets webhook response: {res_body}")
+                except Exception as e:
+                    print(f"Google Sheets logging error: {e}")
+
+            # Send SMS via Twilio if configured in .env
+            twilio_sid = os.getenv("TWILIO_ACCOUNT_SID")
+            twilio_token = os.getenv("TWILIO_AUTH_TOKEN")
+            twilio_from = os.getenv("TWILIO_FROM_NUMBER")
+            if twilio_sid and twilio_token and twilio_from and request.mobile and request.mobile.strip() != "N/A":
+                import urllib.parse
+                import base64
+                try:
+                    sms_body = (
+                        f"MedFlow AI Triage Ticket\n"
+                        f"Patient ID: {patient_id}\n"
+                        f"Patient: {result['name']}\n"
+                        f"Ward: {result['ward'].upper()}\n"
+                        f"Doctor: {result['assigned_doctor']}\n"
+                        f"Slot Time: {result['assigned_slot']}\n"
+                        f"Please scan the QR code in your ticket at check-in."
+                    )
+                    twilio_url = f"https://api.twilio.com/2010-04-01/Accounts/{twilio_sid}/Messages.json"
+                    post_params = urllib.parse.urlencode({
+                        'From': twilio_from.strip(),
+                        'To': request.mobile.strip(),
+                        'Body': sms_body
+                    }).encode('utf-8')
+                    
+                    req_sms = urllib.request.Request(twilio_url, data=post_params)
+                    auth_bytes = f"{twilio_sid.strip()}:{twilio_token.strip()}".encode('utf-8')
+                    req_sms.add_header("Authorization", f"Basic {base64.b64encode(auth_bytes).decode('utf-8')}")
+                    
+                    with urllib.request.urlopen(req_sms, timeout=5) as resp_sms:
+                        pass
+                except Exception as ex_sms:
+                    print(f"Twilio SMS sending failed: {ex_sms}")
 
         return result
     except Exception as e:

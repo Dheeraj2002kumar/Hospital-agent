@@ -7,7 +7,7 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from langgraph.graph import StateGraph, END
 
 # Load environment variables
-load_dotenv()
+load_dotenv(override=True)
 
 # Define CSV Path
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))

@@ -1,9 +1,33 @@
-name,age,query,ward,reasoning,assigned_doctor,assigned_slot
-Alice Smith,25,constant headache and blurry vision,general,LLM classified based on: 'constant headache and blurry vision',Dr. Sharma,09:00
-John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Iyer,09:15
-John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Sharma,09:20
-John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Iyer,09:35
-Jane Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Sharma,09:40
-John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Iyer,09:55
-Raj,21,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,10:00
-Raj,21,kill me,mental_health,LLM classified based on: 'kill me',Dr. Mehta,10:00
+name,age,query,ward,reasoning,assigned_doctor,assigned_slot,email,patient_id,mobile
+Alice Smith,25,constant headache and blurry vision,general,LLM classified based on: 'constant headache and blurry vision',Dr. Sharma,09:00,,,
+John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Iyer,09:15,,,
+John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Sharma,09:20,,,
+John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Iyer,09:35,,,
+Jane Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Sharma,09:40,,,
+John Doe,32,fever and body ache,general,LLM classified based on: 'fever and body ache',Dr. Iyer,09:55,,,
+Raj,21,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,10:00,,,
+Raj,21,kill me,mental_health,LLM classified based on: 'kill me',Dr. Mehta,10:00,,,
+John Doe,32,sudden chest pain and shortness of breath,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Rao,08:50,,,
+David Miller,45,sudden numbness on left side and slurred speech,emergency,LLM classified based on: 'sudden numbness on left side and slurred speech',Dr. Khan,09:00,,,
+David Miller,45,sudden numbness on left side and slurred speech,emergency,LLM classified based on: 'sudden numbness on left side and slurred speech',Dr. Rao,09:00,,,
+Alice Miller,42,sudden weakness on left side and slurred speech,emergency,LLM classified based on: 'sudden weakness on left side and slurred speech',Dr. Khan,09:10,,,
+raj1,32,chest pain ,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Rao,09:10,,,
+Dheeraj Kumar,24,sudden weakness on left side and slurred speech,emergency,LLM classified based on: 'sudden weakness on left side and slurred speech',Dr. Khan,09:20,dheeraj.kumar@example.com,,
+raj,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Rao,09:20,dk8549644@gmail.com,,
+raj,32,feaver,general,LLM classified based on: 'feaver',Dr. Iyer,10:15,test.dev73x@gmail.com,,
+Test Emailer,24,fever,general,LLM classified based on: 'fever',Dr. Sharma,10:20,test.dev73x@gmail.com,,
+Raja,32,feaver,general,LLM classified based on: 'feaver',Dr. Iyer,10:35,test.dev73x@gmail.com,,
+Raja,32,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,10:40,test.dev73@gmail.com,,
+Raja,32,feaver,general,LLM classified based on: 'feaver',Dr. Iyer,10:55,test.dev73@gmail.com,,
+Raja,32,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,11:00,test.dev73@gmail.com,,
+Dheeraj Kumar,24,severe breathing distress,emergency,LLM classified based on: 'severe breathing distress',Dr. Khan,09:30,test.dev73x@gmail.com,,
+Dheeraj Kumar,24,severe breathing distress,emergency,LLM classified based on: 'severe breathing distress',Dr. Rao,09:30,test.dev73x@gmail.com,,
+Email Test,30,severe chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Khan,09:40,test.dev73x@gmail.com,,
+swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Iyer,11:15,test.dev73@gmail.com,,
+swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,11:20,test.dev73x@gmail.com,,
+swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Iyer,11:35,test.dev73x@gmail.com,,
+swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,11:40,test.dev73x@gmail.com,,
+swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Iyer,11:55,test.dev73x@gmail.com,PID-2026-9BFVR,917321916708.0
+swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,12:00,test.dev73x@gmail.com,PID-2026-HQC34,917321916708.0
+swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Iyer,12:15,test.dev73x@gmail.com,PID-2026-QDUMA,917321916708.0
+swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,12:20,test.dev73x@gmail.com,PID-2026-ZR7F9,+917321916708

@@ -64,13 +64,28 @@
                                 </div>
                             </div>
 
-                            <div class="input-row">
-                                <div class="input-group">
+                            <div class="input-row" style="display: flex; gap: 1.5rem;">
+                                <div class="input-group" style="flex: 1;">
                                     <label for="patient-age">Patient Age</label>
                                     <div class="input-wrapper">
                                         <i class="fa-regular fa-calendar"></i>
                                         <input type="number" id="patient-age" placeholder="Age" min="0" max="150" required>
                                     </div>
+                                </div>
+                                <div class="input-group" style="flex: 2;">
+                                    <label for="patient-email">Patient Email</label>
+                                    <div class="input-wrapper">
+                                        <i class="fa-regular fa-envelope"></i>
+                                        <input type="email" id="patient-email" placeholder="patient@example.com" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label for="patient-mobile">Patient Mobile Number</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-phone"></i>
+                                    <input type="tel" id="patient-mobile" placeholder="e.g. +1234567890" required>
                                 </div>
                             </div>
 
@@ -113,42 +128,66 @@
 
                         <!-- Real Triage Result Card -->
                         <div class="result-details" id="triage-result" style="display: none;">
-                            <div class="result-badge-container">
-                                <span class="result-label">Assigned Ward</span>
-                                <div class="ward-badge" id="result-ward">Emergency</div>
-                            </div>
+                            <div class="ticket-container">
+                                <div class="ticket-left">
+                                    <div class="result-badge-container">
+                                        <div style="display: flex; flex-direction: column;">
+                                            <span class="result-label">Patient ID</span>
+                                            <span id="result-pid" style="font-family: var(--font-outfit); font-size: 1.1rem; font-weight: 800; color: var(--primary);">PID-2026-XXXXX</span>
+                                        </div>
+                                        <div style="display: flex; flex-direction: column; align-items: flex-end;">
+                                            <span class="result-label">Assigned Ward</span>
+                                            <div class="ward-badge" id="result-ward">Emergency</div>
+                                        </div>
+                                    </div>
 
-                            <div class="details-list">
-                                <div class="detail-item">
-                                    <div class="detail-icon"><i class="fa-solid fa-user"></i></div>
-                                    <div class="detail-info">
-                                        <span class="detail-label">Patient Name</span>
-                                        <span class="detail-value" id="result-name">John Doe</span>
+                                    <div class="details-list">
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="fa-solid fa-user"></i></div>
+                                            <div class="detail-info">
+                                                <span class="detail-label">Patient Name</span>
+                                                <span class="detail-value" id="result-name">John Doe</span>
+                                            </div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                                            <div class="detail-info">
+                                                <span class="detail-label">Age</span>
+                                                <span class="detail-value" id="result-age">32</span>
+                                            </div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="fa-solid fa-phone"></i></div>
+                                            <div class="detail-info">
+                                                <span class="detail-label">Mobile Number</span>
+                                                <span class="detail-value" id="result-mobile">--</span>
+                                            </div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="fa-solid fa-user-doctor"></i></div>
+                                            <div class="detail-info">
+                                                <span class="detail-label">Assigned Professional</span>
+                                                <span class="detail-value highlight" id="result-doctor">Dr. Sarah Jenkins</span>
+                                            </div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-icon"><i class="fa-solid fa-clock"></i></div>
+                                            <div class="detail-info">
+                                                <span class="detail-label">Assigned Slot Time</span>
+                                                <span class="detail-value highlight" id="result-slot">--:--</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="detail-item">
-                                    <div class="detail-icon"><i class="fa-solid fa-hourglass-half"></i></div>
-                                    <div class="detail-info">
-                                        <span class="detail-label">Age</span>
-                                        <span class="detail-value" id="result-age">32</span>
+                                <div class="ticket-divider"></div>
+                                <div class="ticket-right">
+                                    <div class="qr-container">
+                                        <img id="result-qrcode" src="" alt="Admission Ticket QR Code" />
                                     </div>
-                                </div>
-                                <div class="detail-item">
-                                    <div class="detail-icon"><i class="fa-solid fa-user-doctor"></i></div>
-                                    <div class="detail-info">
-                                        <span class="detail-label">Assigned Professional</span>
-                                        <span class="detail-value highlight" id="result-doctor">Dr. Sarah Jenkins</span>
-                                    </div>
-                                </div>
-                                <div class="detail-item">
-                                    <div class="detail-icon"><i class="fa-solid fa-clock"></i></div>
-                                    <div class="detail-info">
-                                        <span class="detail-label">Assigned Slot Time</span>
-                                        <span class="detail-value highlight" id="result-slot">--:--</span>
-                                    </div>
+                                    <span class="qr-subtext">Admission Ticket</span>
+                                    <span class="qr-instructions">Scan at entrance gate</span>
                                 </div>
                             </div>
-
 
                             <div class="reasoning-box">
                                 <h3><i class="fa-solid fa-quote-left"></i> Classification Reasoning</h3>
