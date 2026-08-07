@@ -1,0 +1,10 @@
+GROQ_API_KEY=Your_GROQ_API_KEY
+
+GOOGLE_SHEET_WEBHOOK_URL=https://script.google.com/macros/s/your-api-of-google-sheet-webhook-urlexec
+
+# GOOGLE_SHEET_WEBHOOK_URL=https://script.google.com/macros/s/your-api-of-google-sheet-webhook-url/exec
+
+# Optional: Twilio SMS configuration to deliver tickets directly to patient mobile numbers
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_FROM_NUMBER=
