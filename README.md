@@ -10,7 +10,7 @@ The current implementation is split into a FastAPI backend powered by a LangGrap
 
 The following diagram represents the high-level MedFlow AI architecture:
 
-![Architecture Diagram](image-4.png)
+![Architecture Diagram](image-5.png)
 
 ## UI Showcase
 
@@ -218,3 +218,5 @@ The backend is prepared for optional integrations that are disabled unless confi
 - Pandas
 - Vanilla HTML, CSS, and JavaScript
 - QR ticket generation in the frontend
+
+![alt text](image-5.png)
