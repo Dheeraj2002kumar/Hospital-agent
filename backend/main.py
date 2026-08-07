@@ -83,6 +83,7 @@ def triage_patient(request: TriageRequest):
             sheet_webhook = os.getenv("GOOGLE_SHEET_WEBHOOK_URL")
             if sheet_webhook and sheet_webhook.strip():
                 import urllib.request
+                import urllib.error
                 import json
                 try:
                     payload = json.dumps(new_patient).encode('utf-8')
@@ -94,8 +95,16 @@ def triage_patient(request: TriageRequest):
                     with urllib.request.urlopen(req, timeout=5) as response:
                         res_body = response.read().decode('utf-8')
                         print(f"Google Sheets webhook response: {res_body}")
+                        result["sheet_status"] = "success"
+                except urllib.error.HTTPError as e:
+                    response_body = e.read().decode('utf-8', errors='ignore')
+                    print(f"Google Sheets logging HTTP error: {e.code} {e.reason} {response_body}")
+                    result["sheet_status"] = "failed"
+                    result["sheet_error"] = f"Google Sheets webhook HTTP {e.code}: {e.reason}"
                 except Exception as e:
                     print(f"Google Sheets logging error: {e}")
+                    result["sheet_status"] = "failed"
+                    result["sheet_error"] = f"Google Sheets webhook failed: {str(e)}"
 
             # Send SMS via Twilio if configured in .env
             twilio_sid = os.getenv("TWILIO_ACCOUNT_SID")

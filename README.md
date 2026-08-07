@@ -218,5 +218,3 @@ The backend is prepared for optional integrations that are disabled unless confi
 - Pandas
 - Vanilla HTML, CSS, and JavaScript
 - QR ticket generation in the frontend
-
-![alt text](image-5.png)

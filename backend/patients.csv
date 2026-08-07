@@ -30,4 +30,12 @@ swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,11:4
 swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Iyer,11:55,test.dev73x@gmail.com,PID-2026-9BFVR,917321916708.0
 swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,12:00,test.dev73x@gmail.com,PID-2026-HQC34,917321916708.0
 swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Iyer,12:15,test.dev73x@gmail.com,PID-2026-QDUMA,917321916708.0
-swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,12:20,test.dev73x@gmail.com,PID-2026-ZR7F9,+917321916708
+swetam singh,32,feaver,general,LLM classified based on: 'feaver',Dr. Sharma,12:20,test.dev73x@gmail.com,PID-2026-ZR7F9,917321916708.0
+swetam singh,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Rao,09:40,test.dev73x@gmail.com,PID-2026-TZGQW,917321916708.0
+swetam singh,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Khan,09:50,test.dev73x@gmail.com,PID-2026-U5R59,917321916708.0
+swetam singh,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Rao,09:50,test.dev73x@gmail.com,PID-2026-M8GBW,917321916708.0
+swetam singh,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Khan,10:00,test.dev73x@gmail.com,PID-2026-342WI,917321916708.0
+swetam singh,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Rao,10:00,test.dev73x@gmail.com,PID-2026-YM4AF,917321916708.0
+Jane Smith,28,Chest pain and shortness of breath,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Khan,10:10,jane@example.com,PID-2026-V5DPI,1234567890.0
+swetam singh,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Rao,10:10,test.dev73x@gmail.com,PID-2026-0M12L,917321916708.0
+swetam singh,32,chest pain,emergency,Emergency keyword detected — routed immediately for safety.,Dr. Khan,10:20,test.dev73x@gmail.com,PID-2026-40ZJU,+917321916708
