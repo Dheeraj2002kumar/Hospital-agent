@@ -62,6 +62,14 @@ MedFlow AI supports a hospital intake flow that:
 
 ---
 
+## Google Sheet Integration
+
+The Google Sheet used for the MedFlow AI patient logging workflow is:
+
+https://docs.google.com/spreadsheets/d/1wEINmEoLLmSAlBnNAL796agJfgFz-eNIzFeVmlGNozE/edit?usp=sharing
+
+The Apps Script Web App endpoint must be deployed from that sheet and saved in the backend environment as `GOOGLE_SHEET_WEBHOOK_URL`.
+
 ## Backend Setup
 
 ### 1. Create a Python environment
@@ -218,3 +226,5 @@ The backend is prepared for optional integrations that are disabled unless confi
 - Pandas
 - Vanilla HTML, CSS, and JavaScript
 - QR ticket generation in the frontend
+
+
